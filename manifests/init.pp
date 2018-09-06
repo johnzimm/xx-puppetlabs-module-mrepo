@@ -123,7 +123,7 @@ class mrepo (
   $www_ip_based                          = $::mrepo::params::www_ip_based,
   $user                                  = $::mrepo::params::user,
   $group                                 = $::mrepo::params::group,
-  Enum['git', 'package'] $source         = $::mrepo::params::source,
+  Enum['git', 'package', 'none'] $source = $::mrepo::params::source,
   $ensure_src                            = $::mrepo::params::ensure_src,
   Optional[Boolean] $selinux             = $::mrepo::params::selinux,
   Boolean $rhn                           = $::mrepo::params::rhn,
