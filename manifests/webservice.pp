@@ -26,37 +26,37 @@ class mrepo::webservice(
   $ip_based   = $mrepo::www_ip_based
   $ip         = $mrepo::www_ip
 
-  case $ensure {
-    'present': {
-      include ::apache
-
-      file { $docroot:
-        ensure => directory,
-        owner  => $user,
-        group  => $group,
-        mode   => '0755',
-      }
-
-      apache::vhost { 'mrepo':
-        priority        => $priority,
-        port            => $port,
-        servername      => $servername,
-        docroot         => $docroot,
-        custom_fragment => template("${module_name}/apache.conf.erb"),
-        ip_based        => $ip_based,
-      }
-      if $ip_based {
-        Apache::Vhost['mrepo'] {
-          ip => $ip,
-        }
-      }
-    }
-    default: {
-      apache::vhost { 'mrepo':
-        ensure  => $ensure,
-        port    => $port,
-        docroot => $docroot,
-      }
-    }
-  }
+  #case $ensure {
+  #  'present': {
+  #    include ::apache
+  #
+  #    file { $docroot:
+  #      ensure => directory,
+  #      owner  => $user,
+  #      group  => $group,
+  #      mode   => '0755',
+  #    }
+  #
+  #    apache::vhost { 'mrepo':
+  #      priority        => $priority,
+  #      port            => $port,
+  #      servername      => $servername,
+  #      docroot         => $docroot,
+  #      custom_fragment => template("${module_name}/apache.conf.erb"),
+  #      ip_based        => $ip_based,
+  #    }
+  #    if $ip_based {
+  #      Apache::Vhost['mrepo'] {
+  #        ip => $ip,
+  #      }
+  #    }
+  #  }
+  #  default: {
+  #    apache::vhost { 'mrepo':
+  #      ensure  => $ensure,
+  #      port    => $port,
+  #      docroot => $docroot,
+  #    }
+  #  }
+  #}
 }
